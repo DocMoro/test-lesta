@@ -1,10 +1,22 @@
 import './MoviesCard.scss';
 
-import React from 'react';
+import React, { FC } from 'react';
 import { useCallback, useState } from 'react';
+import { IShip } from '../CardList/constants/constants';
 
-export default function Card({card}) {
-  const { duration, image, nameRU, trailerLink } = card;
+interface ICard {
+  card: IShip
+}
+
+const Card: FC<ICard> = ({ card }) => {
+  const {   
+    title,
+    description,
+    level,
+    nationName,
+    typeName,
+    icons,
+  } = card;
   const [ isLiked, setIsLiked ] = useState(card.isLike);
 
   const handleClickCreate = useCallback(() => {
@@ -24,4 +36,6 @@ export default function Card({card}) {
       <p className='card__duration'>{getTimeString()}</p>
     </li>
   )
-}
+};
+
+export default Card;

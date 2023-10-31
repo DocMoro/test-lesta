@@ -1,25 +1,29 @@
 import './MoviesCardList.scss';
 
-import React from 'react';
-import { useState, useEffect } from 'react';
-import { useQuery } from 'react-query';
+import React, { useCallback, useState, useEffect } from 'react';
 
-import { getPosts } from './api/shipsApi';
+import { getShips } from './api/shipsApi';
 
 import Card from '../Card/Card';
 
+import { IShip } from './constants/constants';
+
 export default function CardList() {
-  const [columns, setColumns ] = useState(1);
-  const [currentStart, setCurrentStart] = useState(0);
-  const [isMyFetchingDown, setIsMyFetchingDown] = useState(false);
-  const [isMyFetchingUp, setIsMyFetchingUp] = useState(false);
-  const {data: ships} = useQuery(
-    ['ships', currentStart],
-    () => getPosts(currentStart, columns * 10),
-    {
-      keepPreviousData: true,
+  const [columns, setColumns ] = useState<number>(1);
+  const [currentStart, setCurrentStart] = useState<number>(0);
+  const [isMyFetchingDown, setIsMyFetchingDown] = useState<boolean>(false);
+  const [isMyFetchingUp, setIsMyFetchingUp] = useState<boolean>(false);
+  const [cashShips, setCashShips] = useState<IShip[]>([]);
+  const [ships, setShips] = useState<IShip[]>([]);
+
+  const getAllShips = useCallback(async () => {
+    const { data, hasError } = await getShips();
+
+    if(data && !hasError) {
+      setCashShips(data);
+      setShips(data.slice(0, columns * 10));
     }
-  );
+  }, [columns]);
 
   const scrollHandler = e => {
     const element = e.target.documentElement
@@ -41,13 +45,21 @@ export default function CardList() {
   }, []);
 
   useEffect(() => {
+    const newShipsList = cashShips.slice(currentStart, columns * 10);
+
+    setShips(newShipsList);
+  }, [currentStart, cashShips, columns]);
+
+  useEffect(() => {
+    const maxStart = cashShips.length - columns * 10;
+
     if(isMyFetchingDown) {
       setCurrentStart(prev => (
-        prev < 90 ? prev + 1 : prev
+        prev < maxStart ? prev + 1 : prev
       ))
       setIsMyFetchingDown(false);
     }
-  }, [isMyFetchingDown]);
+  }, [isMyFetchingDown, columns, cashShips]);
 
   useEffect(() => {
     if(isMyFetchingUp) {
@@ -88,11 +100,15 @@ export default function CardList() {
     }
   }, []);
 
+  useEffect(() => {
+    getAllShips()
+  });
+
   return (
     <section className='ships'>
       <ul className='ships__list'>
-        {ships.map((card, index) => (
-          <Card card={card} key={index}/>
+        {ships.map((ship) => (
+          <Card card={ship} key={ship.id}/>
         ))}
       </ul>
     </section>

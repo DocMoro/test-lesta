@@ -10,14 +10,14 @@ interface Result<T> {
 }
 
 async function getShips() {
-  const result: Result<IShip> = {
+  const result: Result<IShip[]> = {
     hasError: false,
     errorMessage: "",
     data: null,
   }
 
   try {
-    const serverData = await axios.post(API_URL, { GET_QUERY_SHIPS });
+    const serverData = await axios.post<any>(API_URL, { GET_QUERY_SHIPS });
     const dataShips = serverData.data.vehicles;
     result.data = dataShips;
   } catch(error) {
