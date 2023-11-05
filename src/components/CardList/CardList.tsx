@@ -1,4 +1,4 @@
-import './MoviesCardList.scss';
+import './CardList.scss';
 
 import React, { useCallback, useState, useEffect } from 'react';
 
@@ -25,7 +25,7 @@ export default function CardList() {
     }
   }, [columns]);
 
-  const scrollHandler = e => {
+  const scrollHandler = (e: any) => {
     const element = e.target.documentElement
 
     if(element.scrollTop < 150) {

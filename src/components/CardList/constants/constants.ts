@@ -31,6 +31,9 @@ interface IShip {
 
 export { 
   API_URL,
-  GET_QUERY_SHIPS,
-  IShip
+  GET_QUERY_SHIPS
 };
+
+export type {
+  IShip
+}

@@ -60,7 +60,6 @@
     width: 24px;
     height: 24px;
     background-color: #313131;
-    background-image: url('../../images/like.svg');
     background-size: 9px 9px;
     background-position: center;
     background-repeat: no-repeat;
@@ -69,7 +68,7 @@
     border-radius: 50%;
 
     &_active {
-      background-image: url('../../images/like-active.svg');
+
     }
   }
 
@@ -78,7 +77,6 @@
     width: 24px;
     height: 24px;
     background-color: #313131;
-    background-image: url('../../images/delete.svg');
     background-size: 9px 9px;
     background-position: center;
     background-repeat: no-repeat;

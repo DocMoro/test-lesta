@@ -1,41 +1,31 @@
-import './MoviesCard.scss';
+import './Card.scss';
 
-import React, { FC } from 'react';
-import { useCallback, useState } from 'react';
-import { IShip } from '../CardList/constants/constants';
+import React from 'react';
+import { IShip, API_URL } from '../CardList/constants/constants';
 
 interface ICard {
   card: IShip
 }
 
-const Card: FC<ICard> = ({ card }) => {
+export default function Card({ card }: ICard) {
   const {   
     title,
-    description,
-    level,
-    nationName,
+    //description,
+    //level,
+    //nationName,
     typeName,
     icons,
   } = card;
-  const [ isLiked, setIsLiked ] = useState(card.isLike);
-
-  const handleClickCreate = useCallback(() => {
-    const { name,  } = card;
 
   return (
     <li className='card'>
-      <a className='card__trailer-link' href={trailerLink}>
-        <img className='card__image' src={saved ? image : `https://api.nomoreparties.co/${image.url}`} alt={nameRU} />
+      <a className='card__trailer-link' href='#'>
+        <img className='card__image' src={API_URL + icons.medium} alt={title} />
       </a>
       <div className='card__container'>
-        <h3 className='card__title'>{nameRU}</h3>
-        {saved ? <button className='card__button-delete' onClick={handleClickDelete}></button>
-               : <button className={`card__button-like${isLiked ? ' card__button-like_active' : ''} button` } onClick={handleClickCreate} disabled={isLiked ? true : false}></button>
-        }
+        <h3 className='card__title'>{title}</h3>
       </div>
-      <p className='card__duration'>{getTimeString()}</p>
+      <p className='card__duration'>{typeName}</p>
     </li>
   )
-};
-
-export default Card;
+}

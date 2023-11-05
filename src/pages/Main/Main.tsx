@@ -1,11 +1,11 @@
-import './main.scss';
-
-import React from 'react';
+import './Main.scss';
 
 import CardList from '../../components/CardList/CardList';
 
 export default function Main() {
   return (
-    <CardList />
+    <main className='page'>
+      <CardList />
+    </main>
   )
 }
