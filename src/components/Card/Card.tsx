@@ -1,6 +1,5 @@
 import './Card.scss';
 
-import React from 'react';
 import { IShip, API_URL } from '../CardList/constants/constants';
 
 interface ICard {

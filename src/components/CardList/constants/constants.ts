@@ -1,7 +1,6 @@
 const API_URL = 'https://vortex.korabli.su/api/graphql/glossary';
 
-const GET_QUERY_SHIPS = `
-query vehicles {
+const query = `query vehicles {
   vehicles {
     id
     title
@@ -31,7 +30,7 @@ interface IShip {
 
 export { 
   API_URL,
-  GET_QUERY_SHIPS
+  query
 };
 
 export type {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AxiosError } from "axios";
 
-import { API_URL, GET_QUERY_SHIPS, IShip } from "../constants/constants";
+import { API_URL, query, IShip } from "../constants/constants";
 
 interface Result<T> {
   hasError: boolean;
@@ -17,7 +17,7 @@ async function getShips() {
   }
 
   try {
-    const serverData = await axios.post<any>(API_URL, { GET_QUERY_SHIPS });
+    const serverData = await axios.post<any>(API_URL, { query });
     const dataShips = serverData.data.vehicles;
     result.data = dataShips;
   } catch(error) {
