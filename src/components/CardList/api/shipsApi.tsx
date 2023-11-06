@@ -18,7 +18,7 @@ async function getShips() {
 
   try {
     const serverData = await axios.post<any>(API_URL, { query });
-    const dataShips = serverData.data.vehicles;
+    const dataShips = serverData.data.data.vehicles;
     result.data = dataShips;
   } catch(error) {
     const err = error as AxiosError;

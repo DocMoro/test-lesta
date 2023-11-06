@@ -1,6 +1,6 @@
 import './CardList.scss';
 
-import React, { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 
 import { getShips } from './api/shipsApi';
 
@@ -9,66 +9,45 @@ import Card from '../Card/Card';
 import { IShip } from './constants/constants';
 
 export default function CardList() {
-  const [columns, setColumns ] = useState<number>(1);
-  const [currentStart, setCurrentStart] = useState<number>(0);
-  const [isMyFetchingDown, setIsMyFetchingDown] = useState<boolean>(false);
-  const [isMyFetchingUp, setIsMyFetchingUp] = useState<boolean>(false);
-  const [cashShips, setCashShips] = useState<IShip[]>([]);
+  const [shipsLength, setShipsLength] = useState<number>(30)
+  const [lengthScroll, setLengthScroll ] = useState<number>(10);
   const [ships, setShips] = useState<IShip[]>([]);
 
   const getAllShips = useCallback(async () => {
-    const { data, hasError } = await getShips();
+    const dataBase = localStorage.getItem('ships');
+
+    if (dataBase) {
+      const parseData = JSON.parse(dataBase);
+      setShips(parseData);
+      return;
+    }
+    const { data, hasError } = await getShips(); 
 
     if(data && !hasError) {
-      setCashShips(data);
-      setShips(data.slice(0, columns * 10));
-    }
-  }, [columns]);
-
-  const scrollHandler = (e: any) => {
-    const element = e.target.documentElement
-
-    if(element.scrollTop < 150) {
-      setIsMyFetchingUp(true);
-    }
-    if(element.scrollHeight - element.scrollTop - window.innerHeight < 100) {
-      setIsMyFetchingDown(true);
-      window.scrollTo(0, element.scrollHeight + element.scrollTop);
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener('scroll', scrollHandler);
-    return () => {
-      document.removeEventListener('scroll', scrollHandler);
+      localStorage.setItem('ships', JSON.stringify(data));
+      setShips(data);
     }
   }, []);
 
   useEffect(() => {
-    const newShipsList = cashShips.slice(currentStart, columns * 10);
+    const screen = document.scrollingElement;
 
-    setShips(newShipsList);
-  }, [currentStart, cashShips, columns]);
+    if (screen && ships.length > shipsLength) {
+      const handleScroll = () => {
+        if (3 * screen.clientHeight + screen.scrollTop >= screen.scrollHeight) {
+          setShipsLength(shipsLength + lengthScroll);
+        }
+      };
 
-  useEffect(() => {
-    const maxStart = cashShips.length - columns * 10;
+      window.addEventListener("scroll", handleScroll);
 
-    if(isMyFetchingDown) {
-      setCurrentStart(prev => (
-        prev < maxStart ? prev + 1 : prev
-      ))
-      setIsMyFetchingDown(false);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }
-  }, [isMyFetchingDown, columns, cashShips]);
 
-  useEffect(() => {
-    if(isMyFetchingUp) {
-      setCurrentStart(prev => (
-        prev > 0 ? prev - 1 : prev
-      ))
-      setIsMyFetchingUp(false);
-    }
-  }, [isMyFetchingUp]);
+    return undefined;
+  }, [ships, shipsLength, lengthScroll]);
 
   useEffect(() => {
     function handleResize() {
@@ -77,19 +56,19 @@ export default function CardList() {
         return
       }
 
-      let currentColumns = 4;
+      let currentlength = 40;
   
       if(width < 630) {
-        currentColumns = 1;
+        currentlength = 10;
       } else 
         if(width < 930) {
-          currentColumns = 2;
+          currentlength = 20;
         } else 
           if(width < 1280) {
-            currentColumns = 3;
+            currentlength = 30;
           }
 
-      setColumns(currentColumns)
+      setLengthScroll(currentlength)
     }
 
     handleResize();
@@ -102,12 +81,12 @@ export default function CardList() {
 
   useEffect(() => {
     getAllShips()
-  });
+  }, [getAllShips]);
 
   return (
     <section className='ships'>
       <ul className='ships__list'>
-        {ships.map((ship) => (
+        {ships.slice(0, shipsLength).map((ship) => (
           <Card card={ship} key={ship.id}/>
         ))}
       </ul>

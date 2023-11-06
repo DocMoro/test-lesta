@@ -1,5 +1,7 @@
 .ships {
   padding: 0 70px;
+  width: 100%;
+  box-sizing: border-box;
 
   &__list {
     display: grid;
