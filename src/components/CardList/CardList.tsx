@@ -67,8 +67,9 @@ export default function CardList() {
           if(width < 1280) {
             currentlength = 30;
           }
-
-      setLengthScroll(currentlength)
+      
+      setShipsLength(currentlength);
+      setLengthScroll(currentlength);
     }
 
     handleResize();
@@ -84,7 +85,7 @@ export default function CardList() {
   }, [getAllShips]);
 
   return (
-    <section className='ships'>
+    <section className='ships page__section'>
       <ul className='ships__list'>
         {ships.slice(0, shipsLength).map((ship) => (
           <Card card={ship} key={ship.id}/>
