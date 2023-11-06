@@ -14,6 +14,12 @@ const query = `query vehicles {
   }
 }`;
 
+interface IPopup {
+  active: boolean;
+  image: string;
+  description: string;
+}
+
 interface IIcons {
   medium: string
 }
@@ -34,5 +40,6 @@ export {
 };
 
 export type {
-  IShip
+  IShip,
+  IPopup
 }

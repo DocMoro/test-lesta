@@ -2,16 +2,33 @@ import './CardList.scss';
 
 import { useCallback, useState, useEffect } from 'react';
 
-import { getShips } from './api/shipsApi';
+import { getShips } from '../../api/shipsApi';
 
 import Card from '../Card/Card';
+import ShipPopup from '../ShipPopup/ShipPopup';
 
-import { IShip } from './constants/constants';
+import { IShip, IPopup } from '../../constants/constants';
 
 export default function CardList() {
   const [shipsLength, setShipsLength] = useState<number>(30)
   const [lengthScroll, setLengthScroll ] = useState<number>(10);
   const [ships, setShips] = useState<IShip[]>([]);
+  const [shipPopup, setShipPopup] = useState<IPopup>({
+    active: false,
+    image: '',
+    description: ''
+  })
+
+  const cbShipPopup = useCallback((
+    image = shipPopup.image, 
+    description = shipPopup.description
+  ) => {
+    setShipPopup({
+      active: !shipPopup.active,
+      image,
+      description
+    })
+  }, [shipPopup]);
 
   const getAllShips = useCallback(async () => {
     const dataBase = localStorage.getItem('ships');
@@ -88,9 +105,10 @@ export default function CardList() {
     <section className='ships page__section'>
       <ul className='ships__list'>
         {ships.slice(0, shipsLength).map((ship) => (
-          <Card card={ship} key={ship.id}/>
+          <Card card={ship} cbShipPopup={cbShipPopup} key={ship.id}/>
         ))}
       </ul>
+      <ShipPopup shipPopup={shipPopup} cbShipPopup={cbShipPopup} />
     </section>
   )
 }

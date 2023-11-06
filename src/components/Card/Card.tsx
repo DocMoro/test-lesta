@@ -1,12 +1,14 @@
 import './Card.scss';
+import { useCallback } from 'react';
 
-import { IShip } from '../CardList/constants/constants';
+import { IShip } from '../../constants/constants';
 
 interface ICard {
-  card: IShip
+  card: IShip,
+  cbShipPopup: (image: string, description: string) => void
 }
 
-export default function Card({ card }: ICard) {
+export default function Card({ card, cbShipPopup }: ICard) {
   const {   
     title,
     description,
@@ -16,11 +18,15 @@ export default function Card({ card }: ICard) {
     icons,
   } = card;
 
+  const handleClickImage = useCallback(() => {
+    cbShipPopup(icons.medium, description)
+  }, [cbShipPopup, icons, description])
+
   return (
     <li className='card'>
-      <a className='card__trailer-link' href='#'>
+      <button className='card__popup-btn' onClick={handleClickImage}>
         <img className='card__image' src={icons.medium} alt={title} />
-      </a>
+      </button>
       <div className='card__container'>
         <h3 className='card__title'>{title}</h3>
         <p className='card__title'>{`${level} lvl`}</p>
