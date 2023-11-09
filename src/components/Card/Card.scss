@@ -14,7 +14,7 @@
     left: 0;
 
     width: 100%;
-    height: calc(100% - 123px);
+    height: calc(100% - 90px);
   }
 
   &__image {
@@ -43,17 +43,6 @@
     font-weight: 400;
     font-size: 15px;
     line-height: 17px;
-
-    &_duration {
-      color: #8B8B8B;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-  
-      padding-top: 6px;
-      border-top: 1px solid #424242;
-    }
   }
 
   &__container {
@@ -61,23 +50,22 @@
     justify-content: space-between;
 
     margin-bottom: 15px;
+
+    &:last-child {
+      margin: 0;
+    }
   }
 }
 
 @media screen and (max-width: 520px) {
   .card {
     &__trailer-link {
-      height: calc(100% - 118px);
+      height: calc(100% - 85px);
     }
 
     &__title {
       font-size: 12px;
       line-height: 15px;
-    }
-  
-    &__duration {
-      font-size: 10px;
-      line-height: 12px;
     }
   }
 }

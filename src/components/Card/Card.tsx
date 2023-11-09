@@ -24,7 +24,7 @@ export default function Card({ card, cbShipPopup }: ICard) {
 
   return (
     <li className='card'>
-      <button className='card__popup-btn' onClick={handleClickImage}>
+      <button className='card__popup-btn button' onClick={handleClickImage}>
         <img className='card__image' src={icons.medium} alt={title} />
       </button>
       <div className='card__container'>
@@ -39,7 +39,6 @@ export default function Card({ card, cbShipPopup }: ICard) {
         <p className='card__text'>Nation:</p>
         <p className='card__text'>{nationName}</p>
       </div>
-      <p className='card__text card__text_duration'>{description}</p>
     </li>
   )
 }
