@@ -1,7 +1,8 @@
 import './Card.scss';
 import { useCallback } from 'react';
 
-import { IShip } from '../../constants/constants';
+import { IShip } from '../../constants/interface';
+import { NATIONS, TYPES } from '../../constants/constants';
 
 interface ICard {
   card: IShip,
@@ -33,11 +34,11 @@ export default function Card({ card, cbShipPopup }: ICard) {
       </div>
       <div className='card__container'>
         <p className='card__text'>Type:</p>
-        <p className='card__text'>{typeName}</p>
+        <p className='card__text'>{TYPES[typeName as keyof typeof TYPES]}</p>
       </div>
       <div className='card__container'>
         <p className='card__text'>Nation:</p>
-        <p className='card__text'>{nationName}</p>
+        <p className='card__text'>{NATIONS[nationName as keyof typeof NATIONS]}</p>
       </div>
     </li>
   )

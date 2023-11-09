@@ -2,7 +2,7 @@ import './ShipPopup.scss';
 
 import { useCallback } from 'react';
 
-import { IPopup } from '../../constants/constants';
+import { IPopup } from '../../constants/interface';
 
 interface IShipPopup {
   shipPopup: IPopup;

@@ -1,7 +1,8 @@
 import axios from "axios";
 import { AxiosError } from "axios";
 
-import { API_URL, query, IShip } from "../constants/constants";
+import { API_URL, query } from "../constants/constants";
+import { IShip } from "../constants/interface";
 
 interface Result<T> {
   hasError: boolean;
