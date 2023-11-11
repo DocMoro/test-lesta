@@ -1,12 +1,12 @@
 import './Card.scss';
 import { useCallback } from 'react';
 
-import { IShip } from '../../constants/interface';
+import { IShip, IIcons } from '../../constants/interface';
 import { NATIONS, TYPES } from '../../constants/constants';
 
 interface ICard {
   card: IShip,
-  cbShipPopup: (image: string, description: string) => void
+  cbShipPopup: (image: IIcons, description: string) => void
 }
 
 export default function Card({ card, cbShipPopup }: ICard) {
@@ -20,7 +20,7 @@ export default function Card({ card, cbShipPopup }: ICard) {
   } = card;
 
   const handleClickImage = useCallback(() => {
-    cbShipPopup(icons.medium, description)
+    cbShipPopup(icons, description)
   }, [cbShipPopup, icons, description])
 
   return (

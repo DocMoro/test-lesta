@@ -1,11 +1,12 @@
 interface IPopup {
   active: boolean;
-  image: string;
+  image: IIcons;
   description: string;
 }
 
 interface IIcons {
-  medium: string
+  medium: string;
+  large: string;
 }
 
 interface IShip {
@@ -28,5 +29,6 @@ interface ISearchDt {
 export type {
   IShip,
   IPopup,
+  IIcons,
   ISearchDt
 }

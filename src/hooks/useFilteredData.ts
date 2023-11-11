@@ -2,20 +2,22 @@ import { ISearchDt, IShip } from "../constants/interface";
 
 export default function useFilteredData<D>(select: string, searchData: ISearchDt, setData: (param: D) => void) {
   let data = JSON.parse(sessionStorage.getItem(select) || '');
-  console.log('hhhh')
 
   for(let key in searchData) {
-    if (searchData[key as keyof typeof searchData] === '') {
+    const valueSearch = searchData[key as keyof typeof searchData];
+
+    if (valueSearch === '') {
       continue
     }
     if (key === 'title') {
-      const lowTitle = searchData[key as keyof typeof searchData].toLowerCase();
+      const lowTitle = valueSearch.toLowerCase();
 
       data = data.filter((el: IShip) => el.title.toLowerCase().includes(lowTitle))
       continue
     }
     data = data.filter((el: IShip) => {
-      return searchData[key as keyof typeof searchData] == el[key as keyof typeof el]
+      // eslint-disable-next-line eqeqeq
+      return valueSearch == el[key as keyof typeof el]
     })
   }
 

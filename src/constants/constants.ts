@@ -9,7 +9,9 @@ const query = `query vehicles {
     nationName
     typeName
     icons {
+        small
         medium
+        large
     }
   }
 }`;

@@ -18,11 +18,15 @@ export default function ShipPopup({shipPopup, cbShipPopup}: IShipPopup) {
     }
   }, [cbShipPopup])
 
+  const handleLoadImage = useCallback((e: any) => {
+    e.target.src = image.large;
+  }, [image]);
+
   return (
     <div className={`popup${active ? ' popup_active' : ''}`} onClick={handlerClickClose} >
       <div className='popup__container'>
         <button onClick={cbShipPopup} className='popup__close button'></button>
-        <img src={image} alt='Корабль' />
+        <img src={image.medium} alt='Корабль' onLoad={handleLoadImage} />
         <p>{description}</p>
       </div>
     </div>

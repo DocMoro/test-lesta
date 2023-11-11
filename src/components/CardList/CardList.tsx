@@ -15,7 +15,10 @@ export default function CardList() {
   const [ships, setShips] = useState<IShip[]>([]);
   const [shipPopup, setShipPopup] = useState<IPopup>({
     active: false,
-    image: '',
+    image: {
+      medium: '',
+      large: ''
+    },
     description: ''
   })
 
@@ -95,7 +98,7 @@ export default function CardList() {
     return () => {
       window.removeEventListener('resize', handleResize);
     }
-  }, []);
+  }, [ships]);
 
   useEffect(() => {
     getAllShips()

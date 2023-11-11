@@ -42,49 +42,55 @@ export default function Search({ setData }: ISearch) {
   }, [searchDt, setData, searchShips]);
 
   return (
-    <form className='search page__section'>
-      <input name='title' value={searchDt.title} onChange={handleChange}></input>
-      <fieldset>
-        <label htmlFor="nation-select">Nation</label>
-        <select name='nationName' id='nation-select' value={searchDt.nationName} onChange={handleChange}>
-          <option value=''>All</option>
-          <option value='japan'>{NATIONS.japan}</option>
-          <option value='usa'>{NATIONS.usa}</option>
-          <option value='ussr'>{NATIONS.ussr}</option>
-          <option value='germany'>{NATIONS.germany}</option>
-          <option value='uk'>{NATIONS.uk}</option>
-          <option value='france'>{NATIONS.france}</option>
-          <option value='pan_asia'>{NATIONS.pan_asia}</option>
-          <option value='italy'>{NATIONS.italy}</option>
-          <option value='commonwealth'>{NATIONS.commonwealth}</option>
-          <option value='pan_america'>{NATIONS.pan_america}</option>
-          <option value='europe'>{NATIONS.europe}</option>
-          <option value='netherlands'>{NATIONS.netherlands}</option>
-          <option value='spain'>{NATIONS.spain}</option>
-        </select>
-        <label htmlFor="type-select">Type</label>
-        <select name='typeName' id='type-select' value={searchDt.typeName} onChange={handleChange}>
-          <option value=''>All</option>
-          <option value='submarine'>{TYPES.submarine}</option>
-          <option value='destroyer'>{TYPES.destroyer}</option>
-          <option value='cruiser'>{TYPES.cruiser}</option>
-          <option value='battleship'>{TYPES.battleship}</option>
-          <option value='aircarrier'>{TYPES.aircarrier}</option>
-        </select>
-        <label htmlFor="lvl-select">Lvl</label>
-        <select name='level' id='lvl-select' value={searchDt.level} onChange={handleChange}>
-          <option value=''>All</option>
-          <option value='1'>1</option>
-          <option value='2'>2</option>
-          <option value='3'>3</option>
-          <option value='4'>4</option>
-          <option value='5'>5</option>
-          <option value='6'>6</option>
-          <option value='7'>7</option>
-          <option value='8'>8</option>
-          <option value='9'>9</option>
-          <option value='10'>10</option>
-        </select>
+    <form className='search'>
+      <input className='search__input input' placeholder='Ship' name='title' value={searchDt.title} onChange={handleChange}></input>
+      <fieldset className='search__fieldset'>
+        <div className='search__container'>
+          <label className='search__label' htmlFor="nation-select">Nation</label>
+          <select className='search__select' name='nationName' id='nation-select' value={searchDt.nationName} onChange={handleChange}>
+            <option value=''>All</option>
+            <option value='japan'>{NATIONS.japan}</option>
+            <option value='usa'>{NATIONS.usa}</option>
+            <option value='ussr'>{NATIONS.ussr}</option>
+            <option value='germany'>{NATIONS.germany}</option>
+            <option value='uk'>{NATIONS.uk}</option>
+            <option value='france'>{NATIONS.france}</option>
+            <option value='pan_asia'>{NATIONS.pan_asia}</option>
+            <option value='italy'>{NATIONS.italy}</option>
+            <option value='commonwealth'>{NATIONS.commonwealth}</option>
+            <option value='pan_america'>{NATIONS.pan_america}</option>
+            <option value='europe'>{NATIONS.europe}</option>
+            <option value='netherlands'>{NATIONS.netherlands}</option>
+            <option value='spain'>{NATIONS.spain}</option>
+          </select>
+        </div>
+        <div className='search__container'>
+          <label className='search__label' htmlFor="type-select">Type</label>
+          <select className='search__select' name='typeName' id='type-select' value={searchDt.typeName} onChange={handleChange}>
+            <option value=''>All</option>
+            <option value='submarine'>{TYPES.submarine}</option>
+            <option value='destroyer'>{TYPES.destroyer}</option>
+            <option value='cruiser'>{TYPES.cruiser}</option>
+            <option value='battleship'>{TYPES.battleship}</option>
+            <option value='aircarrier'>{TYPES.aircarrier}</option>
+          </select>
+        </div>
+        <div className='search__container'>
+          <label className='search__label' htmlFor="lvl-select">Lvl</label>
+          <select className='search__select' name='level' id='lvl-select' value={searchDt.level} onChange={handleChange}>
+            <option value=''>All</option>
+            <option value='1'>1</option>
+            <option value='2'>2</option>
+            <option value='3'>3</option>
+            <option value='4'>4</option>
+            <option value='5'>5</option>
+            <option value='6'>6</option>
+            <option value='7'>7</option>
+            <option value='8'>8</option>
+            <option value='9'>9</option>
+            <option value='10'>10</option>
+          </select>
+        </div>
       </fieldset>
     </form>
   )
