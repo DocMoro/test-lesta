@@ -1,6 +1,6 @@
 import './ShipPopup.scss';
 
-import { useCallback } from 'react';
+import { ReactEventHandler, useCallback } from 'react';
 
 import { IPopup } from '../../constants/interface';
 
@@ -12,14 +12,14 @@ interface IShipPopup {
 export default function ShipPopup({shipPopup, cbShipPopup}: IShipPopup) {
   const { description, image, active } = shipPopup;
 
-  const handlerClickClose = useCallback((e: any) => {
+  const handlerClickClose = useCallback((e: React.MouseEvent) => {
     if(e.target === e.currentTarget) {
       cbShipPopup();
     }
   }, [cbShipPopup])
 
-  const handleLoadImage = useCallback((e: any) => {
-    e.target.src = image.large;
+  const handleLoadImage = useCallback((e: React.SyntheticEvent<HTMLImageElement>) => {
+    e.currentTarget.src = image.large;
   }, [image]);
 
   return (
