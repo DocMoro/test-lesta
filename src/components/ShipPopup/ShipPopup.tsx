@@ -1,6 +1,6 @@
 import './ShipPopup.scss';
 
-import { ReactEventHandler, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { IPopup } from '../../constants/interface';
 
