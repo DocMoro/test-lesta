@@ -3,7 +3,7 @@
 
   &__list {
     position: absolute;
-    top: 6px;
+    top: 13px;
     left: 0;
 
     display: flex;
@@ -21,13 +21,14 @@
 
   &__button {
     font-weight: 400;
-    font-size: 13px;
-    line-height: 16px;
-    
+    font-size: 18px;
+    line-height: 19px;
+
     width: 100%;
 
     background-color: #2F2F2F;
     border: none;
+    padding: 5px 0;
 
     &_close {
       opacity: .3;

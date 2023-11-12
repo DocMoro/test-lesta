@@ -1,11 +1,12 @@
 .dropdown__item {
   font-weight: 400;
-  font-size: 13px;
-  line-height: 16px;
+  font-size: 16px;
+  line-height: 17px;
   text-align: start;
 
   background-color: #2F2F2F;
   border: 1px solid #2F2F2F;
+  padding: 4px 0 4px 10px;
 
   &:hover {
     background-color: #1f1f1f;
