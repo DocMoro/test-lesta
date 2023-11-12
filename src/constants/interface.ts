@@ -4,6 +4,11 @@ interface IPopup {
   description: string;
 }
 
+interface IItem {
+  label: string;
+  value: string;
+}
+
 interface IIcons {
   medium: string;
   large: string;
@@ -30,5 +35,6 @@ export type {
   IShip,
   IPopup,
   IIcons,
+  IItem,
   ISearchDt
 }

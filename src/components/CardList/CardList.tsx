@@ -65,8 +65,6 @@ export default function CardList() {
         window.removeEventListener("scroll", handleScroll);
       };
     }
-
-    return undefined;
   }, [ships, shipsLength, lengthScroll]);
 
   useEffect(() => {

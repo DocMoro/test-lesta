@@ -1,0 +1,36 @@
+.dropdown {
+  position: relative;
+
+  &__list {
+    position: absolute;
+    top: 6px;
+    left: 0;
+
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #2F2F2F;
+    padding: 0;
+
+    z-index: 1;
+
+    &_close {
+      display: none;
+    }
+  }
+
+  &__button {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 16px;
+    
+    width: 100%;
+
+    background-color: #2F2F2F;
+    border: none;
+
+    &_close {
+      opacity: .3;
+    }
+  }
+}
