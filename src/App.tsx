@@ -5,9 +5,7 @@ import './App.scss';
 import Main from './pages/Main/Main';
 
 function App() {
-  return (
-    <Main />
-  );
+  return <Main />;
 }
 
 export default App;

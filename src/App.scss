@@ -1,11 +1,14 @@
 %font {
   font: {
-    family: 'Inter', Arial, sans-serif;;
+    family: 'Inter', Arial, sans-serif;
     style: normal;
   }
 }
 
-h1,h2,h3,p {
+h1,
+h2,
+h3,
+p {
   margin: 0;
 }
 
@@ -19,7 +22,7 @@ fieldset {
   @extend %font;
   min-width: 320px;
   min-height: 100vh;
-  color: #FFF;
+  color: #fff;
   background-color: #102031;
 
   display: flex;
@@ -56,23 +59,23 @@ fieldset {
 .link {
   @extend %font;
   color: #fff;
-  transition: opacity .5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
   text-decoration: none;
 
   &:hover {
     cursor: pointer;
-    opacity: .7;
+    opacity: 0.7;
   }
 }
 
 .button {
   @extend %font;
   color: #fff;
-  transition: opacity .5s ease-in-out;
+  transition: opacity 0.5s ease-in-out;
 
   &:hover {
     cursor: pointer;
-    opacity: .8;
+    opacity: 0.8;
   }
 }
 
@@ -82,8 +85,8 @@ fieldset {
   line-height: 16px;
 
   border-radius: 8px;
-  background-color: #2F2F2F;
-  color: #FFF;
+  background-color: #2f2f2f;
+  color: #fff;
   border: none;
   box-sizing: border-box;
 }

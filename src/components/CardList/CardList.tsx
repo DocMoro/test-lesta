@@ -10,28 +10,28 @@ import ShipPopup from '../ShipPopup/ShipPopup';
 import Search from '../Search/Search';
 
 export default function CardList() {
-  const [shipsLength, setShipsLength] = useState<number>(30)
-  const [lengthScroll, setLengthScroll ] = useState<number>(10);
+  const [shipsLength, setShipsLength] = useState<number>(30);
+  const [lengthScroll, setLengthScroll] = useState<number>(10);
   const [ships, setShips] = useState<IShip[]>([]);
   const [shipPopup, setShipPopup] = useState<IPopup>({
     active: false,
     image: {
       medium: '',
-      large: ''
+      large: '',
     },
-    description: ''
-  })
+    description: '',
+  });
 
-  const cbShipPopup = useCallback((
-    image = shipPopup.image, 
-    description = shipPopup.description
-  ) => {
-    setShipPopup({
-      active: !shipPopup.active,
-      image,
-      description
-    })
-  }, [shipPopup]);
+  const cbShipPopup = useCallback(
+    (image = shipPopup.image, description = shipPopup.description) => {
+      setShipPopup({
+        active: !shipPopup.active,
+        image,
+        description,
+      });
+    },
+    [shipPopup]
+  );
 
   const getAllShips = useCallback(async () => {
     const dataBase = sessionStorage.getItem('ships');
@@ -41,9 +41,9 @@ export default function CardList() {
       setShips(parseData);
       return;
     }
-    const { data, hasError } = await getShips(); 
+    const { data, hasError } = await getShips();
 
-    if(data && !hasError) {
+    if (data && !hasError) {
       sessionStorage.setItem('ships', JSON.stringify(data));
       setShips(data);
     }
@@ -59,10 +59,10 @@ export default function CardList() {
         }
       };
 
-      window.addEventListener("scroll", handleScroll);
+      window.addEventListener('scroll', handleScroll);
 
       return () => {
-        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener('scroll', handleScroll);
       };
     }
   }, [ships, shipsLength, lengthScroll]);
@@ -71,21 +71,19 @@ export default function CardList() {
     function handleResize() {
       const width = document.querySelector('.ships__list')?.clientWidth;
       if (!width) {
-        return
+        return;
       }
 
       let currentlength = 40;
-  
-      if(width < 630) {
+
+      if (width < 630) {
         currentlength = 10;
-      } else 
-        if(width < 930) {
-          currentlength = 20;
-        } else 
-          if(width < 1280) {
-            currentlength = 30;
-          }
-      
+      } else if (width < 930) {
+        currentlength = 20;
+      } else if (width < 1280) {
+        currentlength = 30;
+      }
+
       setShipsLength(currentlength);
       setLengthScroll(currentlength);
     }
@@ -95,22 +93,22 @@ export default function CardList() {
 
     return () => {
       window.removeEventListener('resize', handleResize);
-    }
+    };
   }, [ships]);
 
   useEffect(() => {
-    getAllShips()
+    getAllShips();
   }, [getAllShips]);
 
   return (
-    <section className='ships page__section'>
-      <Search setData={setShips}/>
-      <ul className='ships__list'>
+    <section className="ships page__section">
+      <Search setData={setShips} />
+      <ul className="ships__list">
         {ships.slice(0, shipsLength).map((ship) => (
-          <Card card={ship} cbShipPopup={cbShipPopup} key={ship.id}/>
+          <Card card={ship} cbShipPopup={cbShipPopup} key={ship.id} />
         ))}
       </ul>
       <ShipPopup shipPopup={shipPopup} cbShipPopup={cbShipPopup} />
     </section>
-  )
+  );
 }

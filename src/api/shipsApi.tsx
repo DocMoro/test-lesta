@@ -1,27 +1,33 @@
-import axios from "axios";
-import { AxiosError } from "axios";
+import axios from 'axios';
+import { AxiosError } from 'axios';
 
-import { API_URL, NATIONS_QUERY, SHIPS_QUERY, TYPES_QUERY, DEFAULT_ITEM } from "../constants/constants";
-import { IShip, IItem } from "../constants/interface";
+import {
+  API_URL,
+  NATIONS_QUERY,
+  SHIPS_QUERY,
+  TYPES_QUERY,
+  DEFAULT_ITEM,
+} from '../constants/constants';
+import { IShip, IItem } from '../constants/interface';
 
 interface Result<T> {
   hasError: boolean;
   errorMessage: string;
-  data: T | null
+  data: T | null;
 }
 
 async function getShips() {
   const result: Result<IShip[]> = {
     hasError: false,
-    errorMessage: "",
+    errorMessage: '',
     data: null,
-  }
+  };
 
   try {
     const serverData = await axios.post<any>(API_URL, { query: SHIPS_QUERY });
     const dataShips = serverData.data.data.vehicles;
     result.data = dataShips;
-  } catch(error) {
+  } catch (error) {
     const err = error as AxiosError;
     result.hasError = true;
     result.errorMessage = err.message;
@@ -33,12 +39,12 @@ async function getShips() {
 async function getItems(field: string) {
   const result: Result<IItem[]> = {
     hasError: false,
-    errorMessage: "",
+    errorMessage: '',
     data: null,
-  }
+  };
   let query = '';
 
-  switch(field) {
+  switch (field) {
     case 'vehicleTypes':
       query = TYPES_QUERY;
       break;
@@ -52,15 +58,15 @@ async function getItems(field: string) {
     const serverData = await axios.post<any>(API_URL, { query });
     let dataItems = serverData.data.data[field];
     dataItems = dataItems.map((type: any) => {
-      const {title, name} = type;
+      const { title, name } = type;
       return {
         label: title,
-        value: name
-      }
+        value: name,
+      };
     });
     dataItems.unshift(DEFAULT_ITEM);
     result.data = dataItems;
-  } catch(error) {
+  } catch (error) {
     const err = error as AxiosError;
     result.hasError = true;
     result.errorMessage = err.message;
@@ -69,7 +75,4 @@ async function getItems(field: string) {
   return result;
 }
 
-export {
-  getShips,
-  getItems
-};
+export { getShips, getItems };

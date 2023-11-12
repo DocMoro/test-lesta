@@ -4,8 +4,8 @@ import CardList from '../../components/CardList/CardList';
 
 export default function Main() {
   return (
-    <main className='page'>
+    <main className="page">
       <CardList />
     </main>
-  )
+  );
 }

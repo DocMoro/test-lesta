@@ -4,7 +4,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  
+
   top: 0;
   left: 0;
   right: 0;
@@ -24,7 +24,7 @@
     bottom: 0;
 
     opacity: 0;
-    transition: .5s;
+    transition: 0.5s;
 
     z-index: -1;
   }
@@ -33,11 +33,11 @@
     visibility: visible;
 
     &::before {
-      opacity: .3;
+      opacity: 0.3;
     }
   }
 
-  &__container {  
+  &__container {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -49,7 +49,7 @@
     box-sizing: border-box;
 
     border-radius: 1em;
-  
+
     background-color: #202020;
   }
 

@@ -37,4 +37,4 @@ export type {
   IIcons,
   IItem,
   ISearchDt
-}
+};

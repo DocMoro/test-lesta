@@ -57,7 +57,7 @@ const TYPES = {
 const DEFAULT_ITEM = {
   label: 'All',
   value: ''
-}
+};
 
 const OPTIONS_LEVEL = [
   {
