@@ -76,11 +76,11 @@ export default function CardList() {
 
       let currentlength = 40;
 
-      if (width < 670) {
+      if (width < 570) {
         currentlength = 10;
-      } else if (width < 970) {
+      } else if (width < 870) {
         currentlength = 20;
-      } else if (width < 1280) {
+      } else if (width < 1140) {
         currentlength = 30;
       }
 
