@@ -33,6 +33,9 @@ fieldset {
   -moz-osx-font-smoothing: grayscale;
 
   &__section {
+    width: 100%;
+    max-width: 1565px;
+    box-sizing: border-box;
     padding-left: 70px;
     padding-right: 70px;
   }
