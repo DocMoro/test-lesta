@@ -1,8 +1,5 @@
 .ships {
-  padding: 0 70px;
   width: 100%;
-  max-width: 1565px;
-  box-sizing: border-box;
 
   &__list {
     display: grid;
@@ -43,8 +40,6 @@
 
 @media screen and (max-width: 1090px) {
   .ships {
-    padding: 0 30px;
-
     &__list {
       gap: 30px;
     }
@@ -53,8 +48,6 @@
 
 @media screen and (max-width: 520px) {
   .ships {
-    padding: 0 10px;
-
     &__list {
       gap: 34px;
     }
