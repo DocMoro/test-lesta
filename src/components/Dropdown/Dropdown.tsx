@@ -1,17 +1,24 @@
 import './Dropdown.scss';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, memo, FC } from 'react';
 
 import DropdownItem from '../DropdownItem/DropdownItem';
 
+import { OPTIONS_LEVEL } from '../../constants/constants';
 import { IItem } from '../../constants/interface';
+import { getItems } from '../../api/shipsApi';
 
 interface IDropdown {
-  items: IItem[];
   name: string;
   cbChange: (data: { name: string; value: string }) => void;
 }
 
-export default function Dropdown({ items, name, cbChange }: IDropdown) {
+const Dropdown: FC<IDropdown> = memo(({ name, cbChange }) => {
+  const [items, setItems] = useState<IItem[]>([
+    {
+      label: 'All',
+      value: '',
+    },
+  ]);
   const [data, setData] = useState({
     label: 'All',
     isOpen: false,
@@ -55,6 +62,32 @@ export default function Dropdown({ items, name, cbChange }: IDropdown) {
     };
   }, [data]);
 
+  const setSelectsData = useCallback(async () => {
+    if (name === 'level') {
+      setItems(OPTIONS_LEVEL);
+      return;
+    }
+
+    const storData = sessionStorage.getItem(name);
+    if (storData) {
+      const parseData: IItem[] = JSON.parse(storData);
+      setItems(parseData);
+      return;
+    }
+
+    const typesRes = await getItems(
+      name === 'typeName' ? 'vehicleTypes' : 'nations'
+    );
+    if (typesRes.data && !typesRes.hasError) {
+      sessionStorage.setItem(name, JSON.stringify(typesRes.data));
+      setItems(typesRes.data);
+    }
+  }, [name]);
+
+  useEffect(() => {
+    setSelectsData();
+  }, [setSelectsData]);
+
   return (
     <div className="dropdown" ref={menuRef}>
       <button
@@ -83,4 +116,6 @@ export default function Dropdown({ items, name, cbChange }: IDropdown) {
       </ul>
     </div>
   );
-}
+});
+
+export default Dropdown;

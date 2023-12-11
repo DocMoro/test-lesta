@@ -1,0 +1,40 @@
+.page {
+  @extend %font;
+  min-width: 320px;
+  min-height: 100vh;
+  color: #fff;
+  background-color: #102031;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  &__section {
+    width: 100%;
+    max-width: 1565px;
+    box-sizing: border-box;
+    padding-left: 70px;
+    padding-right: 70px;
+  }
+}
+
+@media screen and (max-width: 1090px) {
+  .page {
+    &__section {
+      padding-left: 50px;
+      padding-right: 50px;
+    }
+  }
+}
+
+@media screen and (max-width: 520px) {
+  .page {
+    &__section {
+      padding-left: 18px;
+      padding-right: 18px;
+    }
+  }
+}

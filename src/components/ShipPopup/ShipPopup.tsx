@@ -1,6 +1,5 @@
 import './ShipPopup.scss';
-
-import { useCallback } from 'react';
+import { useCallback, memo, FC } from 'react';
 
 import { IPopup } from '../../constants/interface';
 
@@ -9,7 +8,7 @@ interface IShipPopup {
   cbShipPopup: () => void;
 }
 
-export default function ShipPopup({ shipPopup, cbShipPopup }: IShipPopup) {
+const ShipPopup: FC<IShipPopup> = memo(({ shipPopup, cbShipPopup }) => {
   const { description, image, active } = shipPopup;
 
   const handlerClickClose = useCallback(
@@ -40,4 +39,6 @@ export default function ShipPopup({ shipPopup, cbShipPopup }: IShipPopup) {
       </div>
     </div>
   );
-}
+});
+
+export default ShipPopup;

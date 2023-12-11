@@ -1,11 +1,8 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import './Search.scss';
+import { useCallback, useState, memo, FC } from 'react';
 
-import { useCallback, useEffect, useState } from 'react';
-
-import { OPTIONS_LEVEL } from '../../constants/constants';
-import { IShip, ISearchDt, IItem } from '../../constants/interface';
-import { getItems } from '../../api/shipsApi';
+import { IShip, ISearchDt } from '../../constants/interface';
 
 import useFilteredData from '../../hooks/useFilteredData';
 import useDebounce from '../../hooks/useDebounce';
@@ -15,19 +12,7 @@ interface ISearch {
   setData: (ships: IShip[]) => void;
 }
 
-export default function Search({ setData }: ISearch) {
-  const [nations, setNations] = useState<IItem[]>([
-    {
-      label: 'All',
-      value: '',
-    },
-  ]);
-  const [types, setTypes] = useState<IItem[]>([
-    {
-      label: 'All',
-      value: '',
-    },
-  ]);
+const Search: FC<ISearch> = memo(({ setData }) => {
   const [searchDt, setSearchDt] = useState<ISearchDt>({
     title: '',
     typeName: '',
@@ -68,22 +53,6 @@ export default function Search({ setData }: ISearch) {
     [searchDt, setData]
   );
 
-  const setSelectsData = useCallback(async () => {
-    const typesRes = await getItems('vehicleTypes');
-    if (typesRes.data && !typesRes.hasError) {
-      setTypes(typesRes.data);
-    }
-
-    const nationsRes = await getItems('nations');
-    if (nationsRes.data && !nationsRes.hasError) {
-      setNations(nationsRes.data);
-    }
-  }, []);
-
-  useEffect(() => {
-    setSelectsData();
-  }, [setSelectsData]);
-
   return (
     <form className="search">
       <input
@@ -97,7 +66,6 @@ export default function Search({ setData }: ISearch) {
         <div className="search__container">
           <label className="search__label">Nation</label>
           <Dropdown
-            items={nations}
             name="nationName"
             cbChange={handleChangeSelect}
           />
@@ -105,7 +73,6 @@ export default function Search({ setData }: ISearch) {
         <div className="search__container">
           <label className="search__label">Type</label>
           <Dropdown
-            items={types}
             name="typeName"
             cbChange={handleChangeSelect}
           />
@@ -113,7 +80,6 @@ export default function Search({ setData }: ISearch) {
         <div className="search__container">
           <label className="search__label">Lvl</label>
           <Dropdown
-            items={OPTIONS_LEVEL}
             name="level"
             cbChange={handleChangeSelect}
           />
@@ -121,4 +87,6 @@ export default function Search({ setData }: ISearch) {
       </fieldset>
     </form>
   );
-}
+});
+
+export default Search;

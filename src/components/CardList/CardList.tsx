@@ -1,6 +1,5 @@
 import './CardList.scss';
-
-import { useCallback, useState, useEffect } from 'react';
+import { useCallback, useState, useEffect, memo, FC } from 'react';
 
 import { getShips } from '../../api/shipsApi';
 import { IShip, IPopup } from '../../constants/interface';
@@ -9,7 +8,7 @@ import Card from '../Card/Card';
 import ShipPopup from '../ShipPopup/ShipPopup';
 import Search from '../Search/Search';
 
-export default function CardList() {
+const CardList: FC = memo(() => {
   const [shipsLength, setShipsLength] = useState<number>(30);
   const [lengthScroll, setLengthScroll] = useState<number>(10);
   const [ships, setShips] = useState<IShip[]>([]);
@@ -105,10 +104,14 @@ export default function CardList() {
       <Search setData={setShips} />
       <ul className="ships__list">
         {ships.slice(0, shipsLength).map((ship) => (
-          <Card card={ship} cbShipPopup={cbShipPopup} key={ship.id} />
+          <li key={ship.id}>
+            <Card card={ship} cbShipPopup={cbShipPopup} />
+          </li>
         ))}
       </ul>
       <ShipPopup shipPopup={shipPopup} cbShipPopup={cbShipPopup} />
     </section>
   );
-}
+});
+
+export default CardList;

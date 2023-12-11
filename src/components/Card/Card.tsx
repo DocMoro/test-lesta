@@ -1,5 +1,5 @@
 import './Card.scss';
-import { useCallback } from 'react';
+import { FC, memo, useCallback } from 'react';
 
 import { IShip, IIcons } from '../../constants/interface';
 import { NATIONS, TYPES } from '../../constants/constants';
@@ -9,7 +9,7 @@ interface ICard {
   cbShipPopup: (image: IIcons, description: string) => void;
 }
 
-export default function Card({ card, cbShipPopup }: ICard) {
+const Card: FC<ICard> = memo(({ card, cbShipPopup }) => {
   const { title, description, level, nationName, typeName, icons } = card;
 
   const handleClickImage = useCallback(() => {
@@ -17,7 +17,7 @@ export default function Card({ card, cbShipPopup }: ICard) {
   }, [cbShipPopup, icons, description]);
 
   return (
-    <li className="card">
+    <article className="card">
       <button className="card__popup-btn button" onClick={handleClickImage}>
         <img className="card__image" src={icons.medium} alt={title} />
       </button>
@@ -35,6 +35,8 @@ export default function Card({ card, cbShipPopup }: ICard) {
           {NATIONS[nationName as keyof typeof NATIONS]}
         </p>
       </div>
-    </li>
+    </article>
   );
-}
+});
+
+export default Card;

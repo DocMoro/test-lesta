@@ -1,5 +1,5 @@
 import './DropdownItem.scss';
-import { useCallback } from 'react';
+import { useCallback, memo, FC } from 'react';
 
 import { IItem } from '../../constants/interface';
 
@@ -7,7 +7,7 @@ interface IDropdown extends IItem {
   cbItemClick: (data: IItem) => void;
 }
 
-export default function DropdownItem({ label, value, cbItemClick }: IDropdown) {
+const DropdownItem: FC<IDropdown> = memo(({ label, value, cbItemClick }) => {
   const handleItemClick = useCallback(() => {
     cbItemClick({ label, value });
   }, [label, value, cbItemClick]);
@@ -21,4 +21,6 @@ export default function DropdownItem({ label, value, cbItemClick }: IDropdown) {
       {label}
     </button>
   );
-}
+});
+
+export default DropdownItem;
